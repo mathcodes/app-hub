@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>App Hub — mathcodes</title>
+  <meta name="description" content="Every app and repo by Jon Christie (mathcodes), in one place." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0d12'/><g fill='%238b5cf6'><rect x='20' y='20' width='26' height='26' rx='6'/><rect x='54' y='20' width='26' height='26' rx='6' opacity='.6'/><rect x='20' y='54' width='26' height='26' rx='6' opacity='.6'/><rect x='54' y='54' width='26' height='26' rx='6'/></g></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    try { const t = localStorage.getItem("apphub-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#" aria-label="App Hub home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="brand-text">App Hub</span>
+      </a>
+      <nav class="top-links">
+        <a href="https://jonchristie.net" target="_blank" rel="noopener">Portfolio</a>
+        <a href="https://github.com/mathcodes" target="_blank" rel="noopener">GitHub</a>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle light/dark theme" title="Toggle theme (T)">
+          <svg class="i-sun" viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="i-moon" viewBox="0 0 24 24" width="18" height="18"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">mathcodes · Jon Christie</p>
+      <h1>Every app, every repo,<br /><span class="grad">one hub.</span></h1>
+      <p class="lede">Live sites, source code, and works in progress — searchable, filterable, and checked for uptime right from your browser.</p>
+
+      <div class="stats" id="stats"></div>
+    </section>
+
+    <section class="controls" aria-label="Search and filters">
+      <div class="search">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="Search apps, stacks, hosts…" autocomplete="off" aria-label="Search" />
+        <kbd>/</kbd>
+      </div>
+
+      <div class="row">
+        <div class="chips" id="catChips" role="tablist" aria-label="Category"></div>
+      </div>
+
+      <div class="row row-split">
+        <div class="seg" id="statusSeg" role="radiogroup" aria-label="Status">
+          <button data-status="all" class="on">All</button>
+          <button data-status="live">Live</button>
+          <button data-status="repo">Code only</button>
+          <button data-status="wip">In progress</button>
+          <button data-status="fav">★ Pinned</button>
+        </div>
+        <div class="tools">
+          <label class="select">
+            <span>Sort</span>
+            <select id="sort">
+              <option value="category">Category</option>
+              <option value="name">Name A–Z</option>
+              <option value="newest">Newest</option>
+            </select>
+          </label>
+          <div class="seg seg-icons" id="viewSeg" aria-label="Layout">
+            <button data-view="grid" class="on" title="Grid view" aria-label="Grid view"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></button>
+            <button data-view="list" title="List view" aria-label="List view"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg></button>
+          </div>
+          <button class="btn" id="pingBtn" title="Check whether live sites respond">
+            <span class="pulse" aria-hidden="true"></span><span id="pingLabel">Check status</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div id="sections" aria-live="polite"></div>
+
+    <div class="empty" id="empty" hidden>
+      <p class="empty-title">Nothing matches that.</p>
+      <p>Try a different search, or <button class="link" id="resetBtn">reset filters</button>.</p>
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <span>Data lives in <code>data.js</code> — edit it to add a project.</span>
+    <span class="kbd-help"><kbd>/</kbd> search · <kbd>Esc</kbd> clear · <kbd>T</kbd> theme</span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
