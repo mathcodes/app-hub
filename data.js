@@ -194,18 +194,12 @@ window.APPS = [
   },
   {
     id: "offramp", name: "OffRamp", category: "life",
-    desc: "TypeScript project.",
+    desc: "Car buying and selling — Claude agents search CarGurus, Autotrader, dealers and more by your criteria, ZIP and radius, then dedupe and filter the results.",
     url: null,
     repo: "https://github.com/mathcodes/OffRamp", private: false,
     host: null, status: "repo",
-    stack: ["TypeScript"], added: "2026-10-27",
-  },
-  {
-    id: "car-app", name: "Car Buy & Sell", category: "life",
-    desc: "Agents search used-car sites by exact criteria, ZIP and radius; filterable results with source logos.",
-    url: null, repo: null, private: false,
-    host: null, status: "wip",
-    stack: ["Agents"], added: "2026-10-27",
+    stack: ["Next.js", "TypeScript", "Claude"], added: "2026-10-27",
+    note: "Buy side built; sell / trade-in coming",
   },
 
   // ── Portfolio & Open Source ─────────────────────────────────
